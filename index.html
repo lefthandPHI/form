@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js表单验证</title>
+	<style>
+
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#div{
+			width: 410px;
+			height: 400px;
+			background: #46a3ff;
+			padding-left: 16px;
+			padding-top: 20px;
+		}
+		input{
+			outline: none;
+			box-sizing: border-box;
+			padding-left: 15px;
+		}
+		textarea{
+			outline: none;
+			resize: none;
+			box-sizing: border-box;
+			padding-left: 15px;
+			padding-top: 5px;
+		}
+		.name{
+			width: 200px;
+			height: 30px;
+			margin-left: 8px;
+			border: 1px solid #ffc1e0;
+			border-radius: 8px;
+		}
+		.pwd{
+			width: 200px;
+			height: 30px;
+			margin-left: 8px;
+			border: 1px solid #ffc1e0;
+			border-radius: 8px;
+		}
+		.email{
+			width: 200px;
+			height: 30px;
+			margin-left: 8px;
+			border: 1px solid #ffc1e0;
+			border-radius: 8px;
+		}
+		.txt{
+			width: 280px;
+			height: 70px;
+			margin-left: 8px;
+			border: 1px solid #ddc1e0;
+			border-radius: 8px;
+		}
+		.sub{
+			width: 100px;
+			height: 30px;
+			padding-left: 0px;
+			border: none;
+			border-radius: 5px;
+			background: #ffd0ff;
+		}
+		.sub:hover{
+			background: #ffaad5;
+		}
+		.div{
+			width: 200px;
+			height: 30px;
+			margin: 0 auto;
+			box-sizing: border-box;
+			padding-left: 45px;
+			padding-top: 5px;
+			color: #000000;
+			font-weight: bold;
+		}
+
+	</style>
+</head>
+<body>
+	
+	<div id="div">
+		<form action="">
+			<label for="">用户名：</label>
+			<input type="text" class="name" id="name">
+			<div id="sp" class="div"></div>
+			<label for="">密码：</label>
+			<input type="password" class="pwd" id="pwd">
+			<div id="sp1" class="div"></div>
+			<label for="">邮箱：</label>
+			<input type="text" class="email" id="email">
+			<div id="sp2" class="div"></div>
+			<label for="">爱好：</label>
+			<textarea name="" id="txt" class="txt" cols="30" rows="5"></textarea>
+			<div id="sp3" class="div"></div>
+			<input type="button" class="sub" value="注册" id="sub">
+		</form>
+	</div>
+
+	<script>
+
+		var sub = document.getElementById('sub');
+
+		sub.onclick = function(){
+
+			var val = document.getElementById('name').value;
+			var rel = document.getElementById('name').value.length;
+			if(val == ""){
+				document.getElementById('sp').innerHTML = "用户名不能为空";
+			}else if(rel <= 5 || rel > 10){
+				document.getElementById('sp').innerHTML = "格式不正确";
+			}
+
+			var rel = /^[A-Za-z0-9]{6,10}$/;
+			var val1 = document.getElementById('pwd').value;
+			if(val1 == ""){
+				document.getElementById('sp1').innerHTML = "请输入密码";
+			}else if(!rel.test(val1)){
+				document.getElementById('sp1').innerHTML = "密码不合法";
+			}
+
+			var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+			var val2 = document.getElementById('email').value;
+			if(val2 == ""){
+				document.getElementById('sp2').innerHTML = "请输入邮箱";
+			}else if(!reg.test(val2)){
+				document.getElementById('sp2').innerHTML = "邮箱格式不正确";
+			}
+
+			var val3 = document.getElementById('txt').value;
+			if(val3 == ""){
+				document.getElementById('sp3').innerHTML = "请输入内容";
+			}
+
+		}
+
+		document.getElementById('name').onkeyup = function(){
+			document.getElementById('sp').innerHTML = "";
+		}
+		document.getElementById('pwd').onkeyup = function(){
+			document.getElementById('sp1').innerHTML = "";
+		}
+		document.getElementById('email').onkeyup = function(){
+			document.getElementById('sp2').innerHTML = "";
+		}
+		document.getElementById('txt').onkeyup = function(){
+			var leng = document.getElementById('txt').value.length;
+			if(leng > 20){
+				document.getElementById('sp3').innerHTML = "已超过最大内容";
+			}else{
+				document.getElementById('sp3').innerHTML = "";
+			}
+		}
+
+	</script>
+		
+</body>
+</html>
